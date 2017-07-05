@@ -1,0 +1,16 @@
+<h1>Update Your Post</h1>
+<div id="update-form">
+    <div>
+        <input type="text" placeholder="Update Your Title" ng-model="post.title">
+    </div>
+    <div>
+        <select id="category-selector" ng-model="newCategory">
+            <option value="">Select a Category</option>
+            <option value="{{ category.id }}" ng-repeat="category in categories">{{ category.name }}</option>
+        </select>
+    </div>
+    <div>
+        <textarea id="post-content" cols="30" rows="10" placeholder="Compose Your Post" ng-model="post.content"></textarea>
+    </div>
+    <button id="update-btn" ng-click="updatePost()">Update</button>
+</div>

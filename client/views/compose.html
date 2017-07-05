@@ -1,0 +1,22 @@
+<h1>Compose A Post</h1>
+<div id="compose-form">
+    <div>
+        <input type="text" placeholder="Title" ng-model="newTitle">
+    </div>
+    <div>
+        <select id="category-selector" ng-model="newCategory">
+            <option value="">Select a Category</option>
+            <option value="{{ category.id }}" ng-repeat="category in categories">{{ category.name }}</option>
+        </select>
+    </div>
+    <div>
+        <select id="user-selector" ng-model="newUserId">
+            <option value="">Select a User</option>
+            <option value="{{ user.id }}" ng-repeat="user in users">{{ user.firstname }} {{ user.lastname }}</option>
+        </select>
+    </div>
+    <div>
+        <textarea id="post-content" cols="30" rows="10" placeholder="Compose Your Post" ng-model="newContent"></textarea>
+    </div>
+    <button id="compose-btn" ng-click="savePost()">Compose</button>
+</div>

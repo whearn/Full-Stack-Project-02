@@ -1,0 +1,19 @@
+{
+  "name": "chirper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^1.9.0",
+    "express": "^4.15.3",
+    "mocha": "^1.21.4",
+    "mysql": "^2.13.0",
+    "request": "^2.34.0"
+  }
+}
