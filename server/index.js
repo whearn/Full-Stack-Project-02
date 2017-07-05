@@ -46,7 +46,7 @@ app.route('/api/posts/:id')
             res.sendStatus(500);
         });
     }).put(function(req, res) {
-        empty('UpdatePost', [req.body.title, req.body.content, req.params.id, req.body.categoryid])
+        empty('UpdatePost', [req.body.title, req.body.content, req.body.categoryid, req.params.id])
         .then(function() {
             res.sendStatus(204);
         }).catch(function(err) {

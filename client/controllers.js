@@ -46,7 +46,10 @@ angular.module('angularBlogApp.controllers', [])
     }
 }])
 .controller('UpdateController', ['$scope', 'Post', 'Category', '$location', '$routeParams', function($scope, Post, Category, $location, $routeParams) {
-    $scope.post = Post.get({ id: $routeParams.id });
+    $scope.post = Post.get({ id: $routeParams.id }, function() {
+        // post was retrieved successfully
+        $scope.post.categoryid = String($scope.post.categoryid);
+    });
     $scope.categories = Category.query();
 
     $scope.updatePost = function() {

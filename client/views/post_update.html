@@ -4,7 +4,7 @@
         <input type="text" placeholder="Update Your Title" ng-model="post.title">
     </div>
     <div>
-        <select id="category-selector" ng-model="newCategory">
+        <select id="category-selector" ng-model="post.categoryid">
             <option value="">Select a Category</option>
             <option value="{{ category.id }}" ng-repeat="category in categories">{{ category.name }}</option>
         </select>
