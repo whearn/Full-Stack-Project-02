@@ -1,24 +1,21 @@
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+var cookieParser = require('cookie-parser');
 var api = require('./api');
+var configurePassport = require('./config/passport');
+var routing = require('./middleware/routing.mw');
 
 var clientPath = path.join(__dirname, '../client');
 
 var app = express();
 app.use(express.static(clientPath));
+app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.use('/api', api);
+configurePassport(app);
 
-var pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'localhost',
-    user: 'angularBlogUser',
-    password: 'gurmagangular',
-    database: 'AngularBlog'
-});
+app.use('/api', api);
 
 app.get('*', function(req, res, next) {
     if (isAsset(req.url)) {
@@ -28,6 +25,7 @@ app.get('*', function(req, res, next) {
     }
 });
 
+app.get('*', routing.stateRouting);
 app.listen(3000);
 
 function isAsset(path) {

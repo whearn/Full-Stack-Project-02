@@ -5,6 +5,10 @@ angular.module('angularBlogApp.controllers', [])
     $scope.composePost = function() {
         $location.path('/compose');
     }
+
+    $scope.goToLogin = function() {
+        $location.path('/login');
+    }
 }])
 .controller('SinglePostController', ['$scope', 'Post', '$location', '$routeParams', function($scope, Post, $location, $routeParams) {
     $scope.post = Post.get({ id: $routeParams.id });
@@ -60,3 +64,31 @@ angular.module('angularBlogApp.controllers', [])
         });
     }
 }])
+.controller('UserListController', ['$scope', 'User', 'UserService', function($scope, User, UserService) {
+    UserService.requireLogin();
+    $scope.users = User.query();
+}])
+.controller('LoginController', ['$scope', '$location', 'UserService', function ($scope, $location, UserService) {
+    UserService.me().then(function() {
+        redirect();
+    });
+
+    $scope.login = function() {
+        UserService.login($scope.email, $scope.password)
+        .then(function () {
+            redirect();
+        }, function (err) {
+            console.log(err);
+        });
+    }
+
+    function redirect() {
+        var dest = $location.search().dest;
+
+        if (!dest) {
+            dest = '/';
+        }
+        
+        $location.replace().path(dest).search('dest', null);
+    }
+}]);
