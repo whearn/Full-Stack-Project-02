@@ -1,7 +1,8 @@
 var express = require('express');
+var passport = require('passport');
 var procedures = require('../procedures/users.proc');
 var auth = require('../middleware/auth.mw');
-var passport = require('passport');
+var utils = require('../utils');
 
 var router = express.Router();
 
@@ -47,6 +48,21 @@ router.route('/')
             console.log(err);
             res.sendStatus(500);
         });
+    })
+    .post(auth.isAdmin, function(req, res) {
+        var u = req.body;
+        //pass in what the user has entered as their desired password
+        //encrypt it, and pash it in as the hash
+        //send the hash off to the database along with other user info
+        utils.encryptPassword(u.password)
+        .then(function(hash) {
+            return procedures.create(u.firstname, u.lastname, u.email, hash);
+        }).then(function(id) {
+            res.status(201).send(id);
+        }).catch(function(err) {
+            console.log(err);
+            res.sendStatus(500);
+        })
     });
 
 // actually /api/users/:id
@@ -56,6 +72,24 @@ router.route('/:id')
         .then(function(user) {
             res.send(user);
         }, function(err) {
+            console.log(err);
+            res.sendStatus(500);
+        });
+    })
+    .put(auth.isAdmin, function(req, res) {
+        procedures.update(req.body.firstname, req.body.lastname, req.body.email, req.body.password, req.params.id)
+        .then(function() {
+            res.sendStatus(204);
+        }).catch(function(err) {
+            console.log(err);
+            res.sendStatus(500);
+        });
+    })
+    .delete(auth.isAdmin, function(req, res) {
+        procedures.destroy(req.params.id)
+        .then(function() {
+            res.sendStatus(204);
+        }).catch(function(err) {
             console.log(err);
             res.sendStatus(500);
         });

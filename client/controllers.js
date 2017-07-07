@@ -64,9 +64,60 @@ angular.module('angularBlogApp.controllers', [])
         });
     }
 }])
-.controller('UserListController', ['$scope', 'User', 'UserService', function($scope, User, UserService) {
+.controller('UserListController', ['$scope', 'User', 'UserService', '$location', function($scope, User, UserService, $location) {
     UserService.requireLogin();
     $scope.users = User.query();
+
+    $scope.saveUser = function() {
+        var payload = {
+            firstname: $scope.newFirstName,
+            lastname: $scope.newLastName,
+            email: $scope.newEmail,
+            password: $scope.newPassword
+        };
+
+        var u = new User(payload);
+
+        u.$save(function(success) {
+            $scope.newFirstName = '';
+            $scope.newLastName = '';
+            $scope.newEmail = '';
+            $scope.newPassword = '';
+            $scope.users = User.query();
+        }, function(err) {
+            console.log(err)
+        });
+    }
+}])
+.controller('SingleUserController', ['$scope', 'User', 'UserService', '$location', '$routeParams', function($scope, User, UserService, $location, $routeParams) {
+    UserService.requireLogin();
+    $scope.user = User.get({ id: $routeParams.id });
+
+    $scope.updateUser = function() {
+        $location.path('/users/' + $routeParams.id + '/update');
+    }
+
+    $scope.deleteUser = function() {
+        if(confirm('Are you sure you want to delete this user?')) {
+            $scope.user.$delete(function(success) {
+                $location.replace().path('/users');
+            }, function(err) {
+                console.log(err);
+            })
+        }
+    }
+}])
+.controller('UpdateUserController', ['$scope', 'User', 'UserService', '$location', '$routeParams', function($scope, User, UserService, $location, $routeParams) {
+    UserService.requireLogin();
+    $scope.user = User.get({ id: $routeParams.id });
+
+    $scope.updateUser = function() {
+        $scope.user.$update(function(success) {
+            $location.path('/users/' + $routeParams.id);
+        }, function(err) {
+            console.log(err);
+        });
+    }
 }])
 .controller('LoginController', ['$scope', '$location', 'UserService', function ($scope, $location, UserService) {
     UserService.me().then(function() {

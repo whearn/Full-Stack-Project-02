@@ -27,6 +27,11 @@ a {
     color: salmon;
 }
 
-#compose-form div, #update-form div {
+#compose-form div, #update-form div, #new-user-form div, #update-user-form div {
     margin: 1em 0;
+}
+
+#new-user-form {
+    padding-bottom: 1em;
+    border-bottom: black solid 1px;
 }

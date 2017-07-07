@@ -14,6 +14,14 @@ angular.module('angularBlogApp', ['ngRoute', 'ngResource', 'angularBlogApp.contr
         templateUrl: 'views/login.html',
         controller: 'LoginController'
     })
+    .when('/users/:id/update', {
+        templateUrl: 'views/user_update.html',
+        controller: 'UpdateUserController'
+    })
+    .when('/users/:id', {
+        templateUrl: 'views/single_user.html',
+        controller: 'SingleUserController'
+    })
     .when('/users', {
         templateUrl: 'views/user_list.html',
         controller: 'UserListController'

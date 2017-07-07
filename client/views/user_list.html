@@ -1,2 +1,18 @@
 <h1>User List</h1>
+<div id="new-user-form">
+    <h3>Add New User</h3>
+    <div>
+        <input type="text" placeholder="First Name" ng-model="newFirstName">
+    </div>
+    <div>
+        <input type="text" placeholder="Last Name" ng-model="newLastName">
+    </div>
+    <div>
+        <input type="email" placeholder="Email" ng-model="newEmail">
+    </div>
+    <div>
+        <input type="password" placeholder="Password" ng-model="newPassword">
+    </div>
+    <button id="compose-btn" ng-click="saveUser()">Compose</button>
+</div>
 <system-user ng-repeat="user in users" user-data="user"></system-user>
