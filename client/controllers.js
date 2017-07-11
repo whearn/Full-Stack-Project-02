@@ -1,5 +1,5 @@
 angular.module('angularBlogApp.controllers', [])
-.controller('PostListController', ['$scope', 'Post', '$location', function($scope, Post, $location) {
+.controller('PostListController', ['$scope', 'Post', 'SEOService', '$location', function($scope, Post, SEOService, $location) {
     $scope.posts = Post.query();
 
     $scope.composePost = function() {
@@ -9,8 +9,14 @@ angular.module('angularBlogApp.controllers', [])
     $scope.goToLogin = function() {
         $location.path('/login');
     }
+
+    SEOService.setSEO({
+        title: 'Angular Blog',
+        url: $location.url(),
+        description: 'Welcome to my Angular Blog'
+    })
 }])
-.controller('SinglePostController', ['$scope', 'Post', '$location', '$routeParams', function($scope, Post, $location, $routeParams) {
+.controller('SinglePostController', ['$scope', 'Post', 'SEOService', '$location', '$routeParams', function($scope, Post, SEOService, $location, $routeParams) {
     $scope.post = Post.get({ id: $routeParams.id });
 
     $scope.updatePost = function() {
@@ -26,8 +32,14 @@ angular.module('angularBlogApp.controllers', [])
             })
         }
     }
+
+    SEOService.setSEO({
+        title: 'Post',
+        url: $location.url(),
+        description: 'Post'
+    })
 }])
-.controller('ComposeController', ['$scope', 'Post', 'User', 'Category', '$location', function($scope, Post, User, Category, $location) {
+.controller('ComposeController', ['$scope', 'Post', 'User', 'Category', 'SEOService', '$location', function($scope, Post, User, Category, SEOService, $location) {
     $scope.posts = Post.query();
     $scope.users = User.query();
     $scope.categories = Category.query();
@@ -48,8 +60,15 @@ angular.module('angularBlogApp.controllers', [])
             console.log(err)
         });
     }
+
+    SEOService.setSEO({
+        title: 'Compose a Post',
+        url: $location.url(),
+        description: 'Compose a Post'
+    })
 }])
-.controller('UpdateController', ['$scope', 'Post', 'Category', '$location', '$routeParams', function($scope, Post, Category, $location, $routeParams) {
+.controller('UpdateController', ['$scope', 'Post', 'Category', 'UserService', 'SEOService', '$location', '$routeParams', function($scope, Post, Category, UserService, SEOService, $location, $routeParams) {
+    UserService.requireLogin();
     $scope.post = Post.get({ id: $routeParams.id }, function() {
         // post was retrieved successfully
         $scope.post.categoryid = String($scope.post.categoryid);
@@ -63,8 +82,13 @@ angular.module('angularBlogApp.controllers', [])
             console.log(err);
         });
     }
+    SEOService.setSEO({
+        title: 'Update Post',
+        url: $location.url(),
+        description: 'Update Post'
+    })
 }])
-.controller('UserListController', ['$scope', 'User', 'UserService', '$location', function($scope, User, UserService, $location) {
+.controller('UserListController', ['$scope', 'User', 'UserService', 'SEOService', '$location', function($scope, User, UserService, SEOService, $location) {
     UserService.requireLogin();
     $scope.users = User.query();
 
@@ -88,8 +112,14 @@ angular.module('angularBlogApp.controllers', [])
             console.log(err)
         });
     }
+
+    SEOService.setSEO({
+        title: 'Users',
+        url: $location.url(),
+        description: 'User List'
+    })
 }])
-.controller('SingleUserController', ['$scope', 'User', 'UserService', '$location', '$routeParams', function($scope, User, UserService, $location, $routeParams) {
+.controller('SingleUserController', ['$scope', 'User', 'UserService', 'SEOService', '$location', '$routeParams', function($scope, User, UserService, SEOService, $location, $routeParams) {
     UserService.requireLogin();
     $scope.user = User.get({ id: $routeParams.id });
 
@@ -106,8 +136,14 @@ angular.module('angularBlogApp.controllers', [])
             })
         }
     }
+
+    SEOService.setSEO({
+        title: 'User',
+        url: $location.url(),
+        description: 'User Details'
+    })
 }])
-.controller('UpdateUserController', ['$scope', 'User', 'UserService', '$location', '$routeParams', function($scope, User, UserService, $location, $routeParams) {
+.controller('UpdateUserController', ['$scope', 'User', 'UserService', 'SEOService', '$location', '$routeParams', function($scope, User, UserService, SEOService, $location, $routeParams) {
     UserService.requireLogin();
     $scope.user = User.get({ id: $routeParams.id });
 
@@ -118,8 +154,14 @@ angular.module('angularBlogApp.controllers', [])
             console.log(err);
         });
     }
+
+    SEOService.setSEO({
+        title: 'Update User',
+        url: $location.url(),
+        description: 'Update User'
+    })
 }])
-.controller('LoginController', ['$scope', '$location', 'UserService', function ($scope, $location, UserService) {
+.controller('LoginController', ['$scope', '$location', 'UserService', 'SEOService', function ($scope, $location, UserService, SEOService) {
     UserService.me().then(function() {
         redirect();
     });
@@ -132,6 +174,12 @@ angular.module('angularBlogApp.controllers', [])
             console.log(err);
         });
     }
+
+    SEOService.setSEO({
+        title: 'Login',
+        url: $location.url(),
+        description: 'Login to Angular Blog'
+    })
 
     function redirect() {
         var dest = $location.search().dest;
