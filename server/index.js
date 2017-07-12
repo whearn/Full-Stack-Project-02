@@ -30,7 +30,7 @@ app.get('*', function(req, res, next) {
 });
 
 app.get('*', routing.stateRouting);
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 function isAsset(path) {
     var pieces = path.split('/');
