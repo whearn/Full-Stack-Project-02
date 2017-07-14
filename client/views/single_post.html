@@ -1,11 +1,16 @@
-<div class="post-content">
-    <h1 class="title">{{ post.title }}</h1>
-    <h3 class="author">{{ post.authorfirstname }} {{ post.authorlastname }}</h3>
-    <p class="category">{{ post.categoryname }}</p>
-    <p class="timestamp">{{ post.createdAt | date: 'short' }}</p>
-    <p>{{ post.content }}</p>
-    <div class="buttons">
-        <button id="update-btn" ng-click="updatePost()">Update</button>
-        <button id="delete-btn" ng-click="deletePost()">Delete</button>
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
+</div>
+<div class="list-group">
+    <div class="list-group-item">
+        <h1 class="title">{{ post.title }}</h1>
+        <h3 class="author">{{ post.authorfirstname }} {{ post.authorlastname }}</h3>
+        <p class="category">{{ post.categoryname }}</p>
+        <p class="timestamp">{{ post.createdAt | date: 'short' }}</p>
+        <p>{{ post.content }}</p>
+        <div class="buttons">
+            <button class="btn btn-info" id="update-btn" ng-click="updatePost()">Update</button>
+            <button class="btn btn-danger" id="delete-btn" ng-click="deletePost()">Delete</button>
+        </div>
     </div>
 </div>

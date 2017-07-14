@@ -1,0 +1,31 @@
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
+</div>
+<h2 class="white">Donate</h2>
+<form class="my-form" ng-submit="processDonation()">
+    <div class="form-group">
+        <input class="form-control" type="number" step=".01" ng-model="amount" placeholder="Amount">
+    </div>
+    <div class="form-group white">
+        <label for="card-field">Credit Card</label>
+        <div class="form-control" id="card-field"></div>
+    </div>
+    <div class="form-group white">
+        <label for="">Billing Address</label>
+        <input class="form-control" type="text" ng-model="name" placeholder="Cardholder Name">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="line1" placeholder="Line 1">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="line2" placeholder="Line 2">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="city" placeholder="City">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="state" placeholder="State">
+    </div>
+    <div class="alert alert-danger" role="alert" ng-hide="errorMessage.length === 0">{{ errorMessage }}></div>
+    <input class="btn btn-info" type="submit" value="Donate">
+</form>

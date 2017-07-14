@@ -190,4 +190,45 @@ angular.module('angularBlogApp.controllers', [])
         
         $location.replace().path(dest).search('dest', null);
     }
+}])
+.controller('DonationController', ['$scope', '$location', 'Donation', 'SEOService', function($scope, $location, Donation, SEOService) {
+    //stripe global variable created in index.html
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-field');
+
+    //sets length to 0 so that .length === 0, and will not show until an error is created
+    $scope.errorMessage = '';
+
+    $scope.processDonation = function() {
+        stripe.createToken(card, {
+            name: $scope.name,
+            address_line1: $scope.line1,
+            address_line2: $scope.line2,
+            address_city: $scope.city,
+            address_state: $scope.state
+        }).then(function(result) {
+            if (result.error) {
+                $scope.errorMessage = result.error.message;
+            } else {
+                //result.token is the card token
+                var d = new Donation({
+                    token: result.token.id,
+                    amount: $scope.amount
+                });
+                d.$save(function() {
+                    alert('Thank you for the donation!');
+                    $location.path('/');
+                }, function(err) {
+                    console.log(err);
+                });
+            }
+        });
+    }
+
+    SEOService.setSEO({
+        title: 'Donate',
+        url: $location.url(),
+        description: 'Donate to Angular Blog!'
+    })
 }]);

@@ -1,37 +1,20 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.post {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border: black solid 1px;
-    border-radius: 20px;
-    padding: 1em;
-    overflow: hidden;
-}
-
-.post-left {
-    float: left;
-}
-
-.post-right {
-    float: right;
+    background-color: rebeccapurple;
 }
 
 a {
-    text-decoration: none;
     color: salmon;
 }
 
-#compose-form div, #update-form div, #new-user-form div, #update-user-form div {
-    margin: 1em 0;
+a:hover {
+    text-decoration: none;
+    color: orange;
 }
 
-#new-user-form {
-    padding-bottom: 1em;
-    border-bottom: black solid 1px;
+.my-form {
+    max-width: 300px;
+}
+
+.white {
+    color: white;
 }

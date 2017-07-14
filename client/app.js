@@ -26,6 +26,10 @@ angular.module('angularBlogApp', ['ngRoute', 'ngResource', 'angularBlogApp.contr
         templateUrl: 'views/user_list.html',
         controller: 'UserListController'
     })
+    .when('/donate', { //needs to go before /:id or else it would assume /donate IS an ":id"
+        templateUrl: 'views/donate.html',
+        controller: 'DonationController'
+    })
     .when('/:id/update', {
         templateUrl: 'views/post_update.html',
         controller: 'UpdateController'

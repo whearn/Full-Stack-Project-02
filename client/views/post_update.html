@@ -1,16 +1,19 @@
-<h1>Update Your Post</h1>
-<div id="update-form">
-    <div>
-        <input type="text" placeholder="Update Your Title" ng-model="post.title">
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
+</div>
+<h2 class="white">Update Your Post</h2>
+<form class="my-form" ng-submit="updatePost()">
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Update Your Title" ng-model="post.title">
     </div>
-    <div>
-        <select id="category-selector" ng-model="post.categoryid">
+    <div class="form-group">
+        <select id="category-selector" class="form-control" ng-model="post.categoryid">
             <option value="">Select a Category</option>
             <option value="{{ category.id }}" ng-repeat="category in categories">{{ category.name }}</option>
         </select>
     </div>
-    <div>
-        <textarea id="post-content" cols="30" rows="10" placeholder="Compose Your Post" ng-model="post.content"></textarea>
+    <div class="form-group">
+        <textarea id="post-content" class="form-control" cols="30" rows="10" placeholder="Compose Your Post" ng-model="post.content"></textarea>
     </div>
-    <button id="update-btn" ng-click="updatePost()">Update</button>
-</div>
+    <input class="btn btn-info" type="submit" value="Save">
+</form>

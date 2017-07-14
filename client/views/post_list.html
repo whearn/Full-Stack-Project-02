@@ -1,11 +1,14 @@
-<button id="login-btn" ng-click="goToLogin()">Login</button>
-<button id="compose-btn" ng-click="composePost()">Compose</button>
-<div class="post-list">
-    <div class="post" ng-repeat="post in posts">
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
+    <button id="login-btn" class="btn btn-info" ng-click="goToLogin()">Login</button>
+    <button id="compose-btn" class="btn btn-info" ng-click="composePost()">Compose</button>
+</div>
+<div class="list-group">
+    <div class="list-group-item" ng-repeat="post in posts">
         <div class="post-left">
             <h1 class="title">{{ post.title }}</h1>
             <h3 class="author">{{ post.authorfirstname }} {{ post.authorlastname }}</h3>
-            <p><a href="/{{ post.id }}">Read</a></p>
+            <p><a href="/{{ post.id }}" class="btn btn-info" role="button">Read</a></p>
         </div>
         <div class="post-right">
             <p class="category">{{ post.categoryname }}</p>
@@ -13,4 +16,5 @@
         </div>
     </div>
 </div>
-<a href="/users">View User List</a>
+<a href="/users" class="btn btn-info" role="button">View User List</a>
+<a href="/donate" class="btn btn-info" role="button">Donate</a>

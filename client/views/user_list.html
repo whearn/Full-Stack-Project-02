@@ -1,18 +1,23 @@
-<h1>User List</h1>
-<div id="new-user-form">
-    <h3>Add New User</h3>
-    <div>
-        <input type="text" placeholder="First Name" ng-model="newFirstName">
-    </div>
-    <div>
-        <input type="text" placeholder="Last Name" ng-model="newLastName">
-    </div>
-    <div>
-        <input type="email" placeholder="Email" ng-model="newEmail">
-    </div>
-    <div>
-        <input type="password" placeholder="Password" ng-model="newPassword">
-    </div>
-    <button id="compose-btn" ng-click="saveUser()">Compose</button>
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
 </div>
-<system-user ng-repeat="user in users" user-data="user"></system-user>
+<form class="my-form" ng-submit="saveUser()">
+    <h2 class="white">Add New User</h2>
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="First Name" ng-model="newFirstName">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Last Name" ng-model="newLastName">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="email" placeholder="Email" ng-model="newEmail">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" placeholder="Password" ng-model="newPassword">
+    </div>
+    <input class="btn btn-info" type="submit" value="Save" role="button">
+</form>
+<div class="list-group">
+    <h2 class="white">User List</h2>
+    <system-user ng-repeat="user in users" user-data="user"></system-user>
+</div>

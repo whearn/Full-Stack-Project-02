@@ -22,6 +22,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "prerender-node": "^2.7.2",
-    "request": "^2.34.0"
+    "request": "^2.34.0",
+    "stripe": "^4.23.1"
   }
 }

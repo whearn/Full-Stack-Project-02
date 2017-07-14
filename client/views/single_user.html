@@ -1,8 +1,13 @@
-<h1>View User</h1>
-<div class="single-user">
+<div class="page-header">
+    <h1><a href="/">Angular Blog</a></h1>
+</div>
+<h2 class="white">View User</h2>
+<div class="list-group">
+    <div class="list-group-item">
     <h3>{{ user.firstname }} {{ user.lastname }}</h3>
     <h5>{{ user.email }}</h5>
     <p>{{ user.role }}</p>
-    <button id="update-btn" ng-click="updateUser()">Update</button>
-    <button id="delete-btn" ng-click="deleteUser()">Delete</button>
+    <button class="btn btn-info" id="update-btn" ng-click="updateUser()">Update</button>
+    <button class="btn btn-danger" id="delete-btn" ng-click="deleteUser()">Delete</button>
+</div>
 </div>
